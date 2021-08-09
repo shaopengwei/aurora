@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- 具体使用多参考：http://maven.apache.org/pom.html -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.2</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.aurora</groupId>
+    <artifactId>parent</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <modules>
+        <module>Red</module>
+    </modules>
+    <name>aurora-parent</name>
+    <description>aurora parent project.</description>
+    <!--
+     When no packaging is declared, Maven assumes the packaging is the default: jar
+     maven 主要的三种 packaging 方式：
+        pom: 打出来的可以作为其他项目的 maven 依赖。用在父级工程或聚合工程中。用来做jar包的版本控制。
+        jar: 内部调用或者是作服务使用
+        war: 需要部署的项目
+     -->
+    <packaging>pom</packaging>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+
+    <!-- 可以被子模块直接继承，统一继承版本 -->
+    <dependencies></dependencies>
+
+    <!-- 子模块在 pom 中声明后才会继承，由父模块统计管理版本，子模块无需指定依赖版本 -->
+    <dependencyManagement></dependencyManagement>
+
+</project>
