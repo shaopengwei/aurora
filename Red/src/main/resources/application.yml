@@ -1,0 +1,15 @@
+# springboot 服务配置
+# todo: 有些配置可以改成服务发现
+server:
+  # 端口
+  port: 8080
+  # 服务根路径
+  servlet:
+    context-path: /aurora/red/v1
+
+  # 数据库 MySQL 配置
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: root
