@@ -17,8 +17,9 @@
     <artifactId>parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <modules>
-        <module>Red</module>
-        <module>Red_proxy</module>
+        <module>red</module>
+        <module>red_proxy_server</module>
+        <module>red_proxy_client</module>
     </modules>
     <name>aurora-parent</name>
     <description>aurora parent project.</description>
