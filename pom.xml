@@ -18,8 +18,8 @@
     <version>0.0.1-SNAPSHOT</version>
     <modules>
         <module>red</module>
-        <module>red_proxy_server</module>
-        <module>red_proxy_client</module>
+        <module>red_netty_server</module>
+        <module>red_netty_client</module>
     </modules>
     <name>aurora-parent</name>
     <description>aurora parent project.</description>
