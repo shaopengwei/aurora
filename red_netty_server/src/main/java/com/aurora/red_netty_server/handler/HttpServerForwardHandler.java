@@ -28,6 +28,7 @@ public class HttpServerForwardHandler extends ChannelHandlerAdapter {
             }
 
             // 构造 http request client 将请求转发出去，并获取返回值
+            // TODO: 抽象成工具类
             EventLoopGroup group = new NioEventLoopGroup();
             Bootstrap b = new Bootstrap();
             try {

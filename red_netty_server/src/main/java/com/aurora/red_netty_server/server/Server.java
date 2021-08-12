@@ -1,6 +1,7 @@
 package com.aurora.red_netty_server.server;
 
 import com.aurora.red_netty_server.handler.*;
+import com.aurora.red_netty_server.util.SSLContextFactory;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -12,6 +13,9 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.http.HttpContentCompressor;
 import io.netty.handler.codec.http.HttpObjectAggregator;
 import io.netty.handler.codec.http.HttpServerCodec;
+import io.netty.handler.ssl.SslHandler;
+
+import javax.net.ssl.SSLEngine;
 
 /**
  * TODO
@@ -88,13 +92,19 @@ public class Server {
                 @Override
                 public void initChannel(SocketChannel ch) throws Exception {
                     // httpserver
+                    //添加 sslhandler
+                    SSLEngine sslEngine = SSLContextFactory.getSslContext().createSSLEngine();
+                    sslEngine.setUseClientMode(false);
+                    ch.pipeline().addLast(new SslHandler(sslEngine));
                     // 添加 server 端编解码器
                     ch.pipeline().addLast(new HttpServerCodec());
                     // 添加 server 端聚合器
                     ch.pipeline().addLast(new HttpObjectAggregator(65536));
                     // 添加 server 端 http 请求压缩
                     ch.pipeline().addLast(new HttpContentCompressor());
-                    ch.pipeline().addLast(new HttpServerForwardHandler());
+                    ch.pipeline().addLast(new HttpServerHandler());
+                    // http server 代理
+                    // ch.pipeline().addLast(new HttpServerForwardHandler());
                     // 时间服务器
                     // ch.pipeline().addLast(new TimeEncoder(), new TimeServerHandler());
                     // 测试 echo
