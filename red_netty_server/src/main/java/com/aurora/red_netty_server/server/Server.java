@@ -92,8 +92,9 @@ public class Server {
                 @Override
                 public void initChannel(SocketChannel ch) throws Exception {
                     // httpserver
-                    //添加 sslhandler
-                    SSLEngine sslEngine = SSLContextFactory.getSslContext().createSSLEngine();
+                    // 添加 sslhandler
+                    SSLEngine sslEngine = SSLContextFactory.getSslServerContext().createSSLEngine();
+                    // 设置为服务器模式
                     sslEngine.setUseClientMode(false);
                     ch.pipeline().addLast(new SslHandler(sslEngine));
                     // 添加 server 端编解码器
@@ -102,7 +103,7 @@ public class Server {
                     ch.pipeline().addLast(new HttpObjectAggregator(65536));
                     // 添加 server 端 http 请求压缩
                     ch.pipeline().addLast(new HttpContentCompressor());
-                    ch.pipeline().addLast(new HttpServerHandler());
+                    ch.pipeline().addLast(new HttpsServerHandler());
                     // http server 代理
                     // ch.pipeline().addLast(new HttpServerForwardHandler());
                     // 时间服务器

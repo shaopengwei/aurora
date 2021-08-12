@@ -1,5 +1,6 @@
 package com.aurora.red_netty_client.client;
 
+import com.aurora.red_netty_client.SSLContextFactory;
 import com.aurora.red_netty_client.handler.HttpRequestClientHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
@@ -10,6 +11,9 @@ import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.codec.http.*;
+import io.netty.handler.ssl.SslHandler;
+
+import javax.net.ssl.SSLEngine;
 
 /**
  * @author shaopengwei@hotmail.com
@@ -45,6 +49,9 @@ public class Client {
                 @Override
                 protected void initChannel(SocketChannel ch) throws Exception {
                     // http request
+                    SSLEngine sslEngine = SSLContextFactory.getSslClientContext().createSSLEngine();
+                    sslEngine.setUseClientMode(true);
+                    ch.pipeline().addLast(new SslHandler(sslEngine));
                     ch.pipeline().addLast(new HttpClientCodec());
                     ch.pipeline().addLast(new HttpObjectAggregator(65536));
                     ch.pipeline().addLast(new HttpContentDecompressor());
