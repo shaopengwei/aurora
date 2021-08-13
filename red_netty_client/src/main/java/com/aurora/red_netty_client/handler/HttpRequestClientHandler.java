@@ -17,7 +17,7 @@ public class HttpRequestClientHandler extends ChannelHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
-        URI uri = new URI("/task/listtasks");
+        URI uri = new URI("/");
         FullHttpRequest request = new DefaultFullHttpRequest(HttpVersion.HTTP_1_1, HttpMethod.GET, uri.toASCIIString());
         // http 1.1 强制要求 header 加 host
         request.headers().add(HttpHeaderNames.HOST, "");

@@ -1,4 +1,4 @@
-package com.aurora.red_netty_client;
+package com.aurora.red_netty_client.util;
 
 import lombok.experimental.UtilityClass;
 
@@ -18,8 +18,9 @@ public class SSLContextFactory {
 
   public SSLContext getSslClientContext() throws Exception {
     KeyStore keyStore = KeyStore.getInstance("JKS");
-    //加载客户端证书
-    InputStream inputStream = new FileInputStream("E:\\JAVA\\work\\aurora\\cert\\client1.jks");
+    // 加载客户端证书，这里面包含了所有信任的证书
+    // TODO：keytool 的使用
+    InputStream inputStream = new FileInputStream("/Users/shaopengwei/IdeaProjects/aurora/cert/client.jks");
     keyStore.load(inputStream, "Shao@1225".toCharArray());
     TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
     trustManagerFactory.init(keyStore);

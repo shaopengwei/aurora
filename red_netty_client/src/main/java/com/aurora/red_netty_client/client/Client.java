@@ -1,6 +1,6 @@
 package com.aurora.red_netty_client.client;
 
-import com.aurora.red_netty_client.SSLContextFactory;
+import com.aurora.red_netty_client.util.SSLContextFactory;
 import com.aurora.red_netty_client.handler.HttpRequestClientHandler;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.ChannelFuture;
